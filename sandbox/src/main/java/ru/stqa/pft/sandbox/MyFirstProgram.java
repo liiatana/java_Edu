@@ -8,14 +8,11 @@ public class MyFirstProgram {
     hello("world");
 
     Square s=new Square(6.9);
-    //s.l = 6.2;
-    double s1 = area(s);
+    double s1 = s.area();
     System.out.println("Площадь квадрата со стороной " + s.l + " равна " + s1);
 
     Rectangle r=new Rectangle(7.3,8.0);
-   // r.a = 6.2;
-    //r.b = 6.7;
-    System.out.println("Площадь прямоугольника со сторонами: " +r.a +" и "+ r.b+ " равна " + area(r));
+       System.out.println("Площадь прямоугольника со сторонами: " +r.a +" и "+ r.b+ " равна " + r.area());
   }
 
   public static void hello(String some) {
@@ -24,14 +21,6 @@ public class MyFirstProgram {
     //System.out.println("Hello,world!");
   }
 
-  public static double area(Square s) {
-    return s.l * s.l;
-  }
 
-
-  public static double area(Rectangle r) {
-    return r.a * r.b;
-  }
-
-
+  
 }
