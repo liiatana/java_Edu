@@ -6,9 +6,9 @@ public class MyFirstProgram {
     Point p1 = new Point(2, 3);
     Point p2 = new Point(6, 8);
 
-     System.out.println("Расстояние между точками с координатами:(" + p1.x + "," + p2.x + ") и (" + p2.x + "," + p2.y + ") составляет " + distance(p1, p2));
+     System.out.println("Расстояние между точками с координатами(func):(" + p1.x + "," + p2.x + ") и (" + p2.x + "," + p2.y + ") составляет " + distance(p1, p2));
 
-    p2.distance(p1, p2);
+    p1.distance(p2.x, p2.y);
   }
 
    public static double distance(Point p1, Point p2) {
