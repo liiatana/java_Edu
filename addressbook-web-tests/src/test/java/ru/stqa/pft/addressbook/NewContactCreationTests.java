@@ -33,7 +33,7 @@ public class NewContactCreationTests {
   }
 
   @Test
-  public void NewContactCreationTests() {
+  public void testNewContactCreation() {
 
     gotoNewContactPage();
     fillNewContactForm(new NewContactData("firstname2", "lastname", "Russia", "8927554145", "414542", "email@test.ru", "email3@test.ru", "penza"));
