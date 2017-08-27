@@ -8,7 +8,7 @@ public class GroupCreationTests extends TestBase {
   @Test
   //создание группы в адресной книге
   public void testGroupCreation() {
-    app.gotoGroupPage();
+    app.getNavigationManager().gotoGroupPage();
     app.getGroupHelper().initGroupCreation();
     app.getGroupHelper().fillGroupForm(new GroupData("test11", "test2", "test3"));
     app.getGroupHelper().submitGroupCreation();

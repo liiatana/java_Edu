@@ -11,7 +11,9 @@ public class ApplicationManager {
 
   FirefoxDriver wd;
 
+  private NavigationManager navigationManager;
   private GroupHelper groupHelper;
+  private SessionHelper sessionHelper;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -30,22 +32,12 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost:8080/addressbook/");
     groupHelper = new GroupHelper(wd);
-    login("admin", "secret");
+    navigationManager = new NavigationManager(wd);
+    sessionHelper=new SessionHelper(wd);
+    sessionHelper.login("admin", "secret");
   }
 
-  private void login(String username, String password) {
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-  }
 
-  public void gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
-  }
 
   public void stop() {
     wd.quit();
@@ -53,5 +45,9 @@ public class ApplicationManager {
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
+  }
+
+  public NavigationManager getNavigationManager() {
+    return navigationManager;
   }
 }
