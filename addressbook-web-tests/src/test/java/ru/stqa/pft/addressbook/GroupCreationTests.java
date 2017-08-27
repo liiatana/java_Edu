@@ -33,6 +33,7 @@ public class GroupCreationTests {
   }
 
   @Test
+  //создание группы в адресной книге
   public void testGroupCreation() {
     gotoGroupPage();
     initGroupCreation();
