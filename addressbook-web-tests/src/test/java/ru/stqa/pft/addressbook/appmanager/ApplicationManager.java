@@ -12,7 +12,7 @@ public class ApplicationManager {
   private NavigationManager navigationManager;
   private GroupHelper groupHelper;
   private SessionHelper sessionHelper;
-
+  private ContactHelper contactHelper;
 
 
   public void init() {
@@ -25,6 +25,7 @@ public class ApplicationManager {
     groupHelper = new GroupHelper(wd);
     navigationManager = new NavigationManager(wd);
     sessionHelper=new SessionHelper(wd);
+    contactHelper =new ContactHelper(wd);
     sessionHelper.login("admin", "secret");
   }
 
@@ -41,4 +42,10 @@ public class ApplicationManager {
   public NavigationManager getNavigationManager() {
     return navigationManager;
   }
+
+  public ContactHelper getContactHelper() {
+    return contactHelper;
+  }
+
+
 }

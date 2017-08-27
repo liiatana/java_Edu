@@ -14,4 +14,12 @@ public class NavigationManager extends HelperBase {
 
     click(By.linkText("groups"));
   }
+
+  public void gotoAddNewPage() {
+    click(By.linkText("add new"));
+  }
+
+  public void gotoHome() {
+    click(By.linkText("home page"));
+  }
 }
