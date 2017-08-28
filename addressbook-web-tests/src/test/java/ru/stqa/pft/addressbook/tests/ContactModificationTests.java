@@ -20,7 +20,7 @@ public class ContactModificationTests extends TestBase {
   }
 
   @Test //тест изменения контакта через промотр карточки контакта
-  public void contactModificationByDetails(){
+  public void contactModificationByDetails() {
 
     app.getContactHelper().openContactDetails();
     app.getContactHelper().initContantactModificationByDetails();

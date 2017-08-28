@@ -16,19 +16,16 @@ public class ApplicationManager {
 
 
   public void init() {
-   // groupHelper.wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-    //groupHelper.wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    //groupHelper.wd.get("http://localhost:8080/addressbook/");
+
     wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost:8080/addressbook/");
     groupHelper = new GroupHelper(wd);
     navigationManager = new NavigationManager(wd);
-    sessionHelper=new SessionHelper(wd);
-    contactHelper =new ContactHelper(wd);
+    sessionHelper = new SessionHelper(wd);
+    contactHelper = new ContactHelper(wd);
     sessionHelper.login("admin", "secret");
   }
-
 
 
   public void stop() {
