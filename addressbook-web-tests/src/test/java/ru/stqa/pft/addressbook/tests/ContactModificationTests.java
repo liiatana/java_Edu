@@ -9,10 +9,14 @@ public class ContactModificationTests extends TestBase {
   public void contactModificationTestByEditClick() {
 
     app.getContactHelper().initContantactModificationByEditClick();
-    app.getContactHelper().fillContactForm(new NewContactData("mody1qqqq", "QAZ", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world"));
+    fillNewContactInformation(new NewContactData("mody1qqqq", "QAZ", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world"));
+
+  }
+
+  private void fillNewContactInformation(NewContactData contactData) {
+    app.getContactHelper().fillContactForm(contactData);
     app.getContactHelper().submitContactModification();
     app.getNavigationManager().gotoHome();
-
   }
 
   @Test //тест изменения контакта через промотр карточки контакта
@@ -20,9 +24,7 @@ public class ContactModificationTests extends TestBase {
 
     app.getContactHelper().openContactDetails();
     app.getContactHelper().initContantactModificationByDetails();
-    app.getContactHelper().fillContactForm(new NewContactData("Detmody1qqqq", "ZXC", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world"));
-    app.getContactHelper().submitContactModification();
-    app.getNavigationManager().gotoHome();
+    fillNewContactInformation(new NewContactData("Detmody1qqqq", "ZXC", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world"));
   }
 
 }
