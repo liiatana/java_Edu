@@ -40,21 +40,20 @@ public class ContactHelper extends HelperBase {
 
   }
   
-  
-  
+
 
   public void submitContactModification() {
     click(By.name("update"));
   }
 
-  public void selectContacts(String i) {
+  public void selectContacts(String contactId) {
     //wd.findElement(By.cssSelector("body")).click();
-    if (!wd.findElement(By.id("3")).isSelected()) {
-      wd.findElement(By.id("3")).click();
-    }
+   // if (!wd.findElement(By.id("3")).isSelected()) {
+    //  wd.findElement(By.id("3")).click();
+    //}
     //wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
 
-    //click(By.id(i));
+    click(By.id(contactId));
     //wd.findElement(By.id(i)).
   }
 
@@ -65,5 +64,11 @@ public class ContactHelper extends HelperBase {
   public void initContantactModificationByDetails() {
     click(By.name("modifiy"));
    // /html/body/div/div[4]/form[1]/input[2]
+  }
+
+  public void deleteSelectedContacts() {
+
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    wd.switchTo().alert().accept();
   }
 }

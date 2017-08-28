@@ -22,4 +22,8 @@ public class NavigationManager extends HelperBase {
   public void gotoHome() {
     click(By.linkText("home page"));
   }
+
+  public void gotoHomeMenuLevel() {
+    click(By.linkText("home"));
+  }
 }
