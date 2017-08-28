@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
-public class NewContactCreationTests {
+public class NewContactCreationTests { // тест записанный рекордером, но измененный только выделением методов
   FirefoxDriver wd;
 
   @BeforeMethod

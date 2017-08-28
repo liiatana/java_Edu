@@ -26,4 +26,44 @@ public class ContactHelper extends HelperBase {
   public void submitContactCreation() {
     click(By.name("submit"));
   }
+
+  public void initContantactModificationByEditClick() {
+    //click(By.xpath("//*[@id=\"14\"]"));
+    //click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+    //"//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"
+    //"//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"
+    //click(By.name("selected[]"));
+    click(By.xpath("//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
+
+    //click(By.cssSelector("html body div#container div#content form table#maintable.sortcompletecallback-applyZebra tbody tr td.center a img"));
+
+
+  }
+  
+  
+  
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+
+  public void selectContacts(String i) {
+    //wd.findElement(By.cssSelector("body")).click();
+    if (!wd.findElement(By.id("3")).isSelected()) {
+      wd.findElement(By.id("3")).click();
+    }
+    //wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
+
+    //click(By.id(i));
+    //wd.findElement(By.id(i)).
+  }
+
+  public void openContactDetails() {
+    click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[7]/a/img"));
+  }
+
+  public void initContantactModificationByDetails() {
+    click(By.name("modifiy"));
+   // /html/body/div/div[4]/form[1]/input[2]
+  }
 }
