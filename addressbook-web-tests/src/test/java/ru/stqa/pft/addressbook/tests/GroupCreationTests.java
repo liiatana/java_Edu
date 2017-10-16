@@ -9,10 +9,12 @@ public class GroupCreationTests extends TestBase {
   //создание группы в адресной книге
   public void testGroupCreation() {
     app.getNavigationManager().gotoGroupPage();
-    app.getGroupHelper().initGroupCreation();
-    app.getGroupHelper().fillGroupForm(new GroupData("test121", "test2", null));
+
+    app.getGroupHelper().createGroup(new GroupData("CreateGr", "test2", null));
+    /*app.getGroupHelper().initGroupCreation();
+    app.getGroupHelper().fillGroupForm(new GroupData("test444121", "test2", null));
     app.getGroupHelper().submitGroupCreation();
-    app.getGroupHelper().returnToGroupPage();
+    app.getGroupHelper().returnToGroupPage();*/
   }
 
 }
