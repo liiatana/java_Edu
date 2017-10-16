@@ -12,15 +12,26 @@ public class NavigationManager extends HelperBase {
 
   public void gotoGroupPage() {
 
-    //if(isElementPresent(By.tagName("h1")) && )
+    if(isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Groups")
+            && isElementPresent(By.tagName("new"))){
+      return;
+    }
     click(By.linkText("groups"));
   }
 
   public void gotoAddNewPage() {
+    if(isElementPresent(By.id("Enter"))){
+      return;
+    }
     click(By.linkText("add new"));
   }
 
   public void gotoHome() {
+
+    if(isElementPresent(By.id("maintable"))){
+      return;
+    }
     click(By.linkText("home page"));
   }
 

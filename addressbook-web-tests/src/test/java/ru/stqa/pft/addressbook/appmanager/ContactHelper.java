@@ -25,6 +25,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("address2"), contactData.getAddress2());
 
     if(creation) {
+      //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); //отключение таймаута
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
 
     } else {
