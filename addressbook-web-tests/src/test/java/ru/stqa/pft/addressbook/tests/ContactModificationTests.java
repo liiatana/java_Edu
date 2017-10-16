@@ -9,12 +9,12 @@ public class ContactModificationTests extends TestBase {
   public void contactModificationTestByEditClick() {
 
     app.getContactHelper().initContantactModificationByEditClick();
-    fillNewContactInformation(new NewContactData("mody1qqqq", "QAZ", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world"));
+    fillNewContactInformation((new NewContactData("mody1qqqq", "QAZ", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world",null)));
 
   }
 
   private void fillNewContactInformation(NewContactData contactData) {
-    app.getContactHelper().fillContactForm(contactData);
+    app.getContactHelper().fillContactForm(contactData,false);
     app.getContactHelper().submitContactModification();
     app.getNavigationManager().gotoHome();
   }
@@ -24,7 +24,7 @@ public class ContactModificationTests extends TestBase {
 
     app.getContactHelper().openContactDetails();
     app.getContactHelper().initContantactModificationByDetails();
-    fillNewContactInformation(new NewContactData("Detmody1qqqq", "ZXC", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world"));
+    fillNewContactInformation(new NewContactData("Detmody1qqqq", "ZXC", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world","test11"));
   }
 
 }
