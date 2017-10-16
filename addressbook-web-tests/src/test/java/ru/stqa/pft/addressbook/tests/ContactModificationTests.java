@@ -27,5 +27,11 @@ public class ContactModificationTests extends TestBase {
     fillNewContactInformation(new NewContactData("Detmody1qqqq", "ZXC", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world","test11"));
   }
 
+  public void createNewContact() {
+    app.getNavigationManager().gotoAddNewPage();
+    app.getContactHelper().fillContactForm(new NewContactData("1610", "l1", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world","test11"),true);
+    app.getContactHelper().submitContactCreation();
+    app.getNavigationManager().gotoHome();
+  }
 }
 
