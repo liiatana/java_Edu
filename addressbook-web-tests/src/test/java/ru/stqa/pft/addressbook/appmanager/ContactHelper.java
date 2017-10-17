@@ -4,8 +4,12 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.NewContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -55,12 +59,13 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void selectContacts() {
+  public void selectContacts( int contactId) {
 
-    if(isElementPresent(By.name("selected[]"))){
+    /*if(isElementPresent(By.name("selected[]"))){
       click(By.name("selected[]"));
-    }
-
+    }*/
+    wd.findElements(By.name("selected[]")).get(contactId).click();
+    // click(By.name("selected[]"));
 
   }
 
@@ -92,4 +97,28 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  public List<NewContactData> getContactList() {
+
+    List<NewContactData> contacts = new ArrayList<NewContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//tbody/tr[@name='entry']"));//находит все элементы по css сектору
+
+    for (WebElement element : elements) {
+      List<WebElement> elementDes = element.findElements(By.tagName("td"));
+
+      NewContactData contact = new NewContactData(
+              Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")),
+              elementDes.get   (1).getText(),
+              elementDes.get   (2).getText(),
+              elementDes.get   (3).getText(),
+              null,
+              null,
+              null,
+              null,
+              null,
+              null);
+      contacts.add(contact);
+    }
+    ;
+    return contacts;
+  }
 }
