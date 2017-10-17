@@ -2,10 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupHelper extends HelperBase{
+import java.util.ArrayList;
+import java.util.List;
+
+public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver wd) {
     super(wd);
@@ -34,10 +37,10 @@ public class GroupHelper extends HelperBase{
     click(By.name("delete"));
   }
 
-  public void selectGroup( int index) {
+  public void selectGroup(int index) {
 
     wd.findElements(By.name("selected[]")).get(index).click();
-   // click(By.name("selected[]"));
+    // click(By.name("selected[]"));
   }
 
   public void initGroupModification() {
@@ -66,4 +69,17 @@ public class GroupHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  public List<GroupData> getGroupList() {
+
+    List<GroupData> groups = new ArrayList<GroupData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));//находит все элементы по css сектору с тегом span и классом group
+    for (WebElement element : elements) {
+      GroupData group = new GroupData(element.getText(), null, null);
+      groups.add(group);
+    }
+    ;
+
+    return groups;
+
+  }
 }

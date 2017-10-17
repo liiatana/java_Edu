@@ -37,7 +37,7 @@ public class ApplicationManager {
     }
 
 
-    
+    //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); //отключение таймаута
     wd.get("http://localhost:8080/addressbook/");
     groupHelper = new GroupHelper(wd);
     navigationManager = new NavigationManager(wd);

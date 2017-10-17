@@ -55,9 +55,12 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void selectContacts(String contactId) {
+  public void selectContacts() {
 
-    click(By.id(contactId));
+    if(isElementPresent(By.name("selected[]"))){
+      click(By.name("selected[]"));
+    }
+
 
   }
 
@@ -75,4 +78,18 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     wd.switchTo().alert().accept();
   }
+
+  public boolean findAnyContact() {
+
+         return isElementPresent(By.name("selected[]"));
+  }
+
+
+  public void createNewContact(NewContactData contactData) {
+
+    fillContactForm(contactData,true);
+    submitContactCreation();
+
+  }
+
 }
