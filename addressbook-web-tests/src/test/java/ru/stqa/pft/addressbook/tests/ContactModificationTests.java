@@ -5,7 +5,7 @@ import ru.stqa.pft.addressbook.model.NewContactData;
 
 public class ContactModificationTests extends TestBase {
 
-  @Test // тест изменения контакта через кнопку Edit(Карандаш)
+  @Test (enabled=false) // тест изменения контакта через кнопку Edit(Карандаш)
   public void contactModificationTestByEditClick() {
 
     app.getContactHelper().initContantactModificationByEditClick();
@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
     app.getNavigationManager().gotoHome();
   }
 
-  @Test //тест изменения контакта через промотр карточки контакта
+  @Test (enabled=false)//тест изменения контакта через промотр карточки контакта
   public void contactModificationByDetails() {
 
     app.getContactHelper().openContactDetails();

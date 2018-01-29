@@ -100,7 +100,7 @@ public class ContactHelper extends HelperBase {
   public List<NewContactData> getContactList() {
 
     List<NewContactData> contacts = new ArrayList<NewContactData>();
-    List<WebElement> elements = wd.findElements(By.xpath("//tbody/tr[@name='entry']"));//находит все элементы по css сектору
+    List<WebElement> elements = wd.findElements(By.xpath("//tbody/tr[@name='entry']")); //wd.findElements(By.xpath("//tbody/tr[@name='entry']"));//находит все элементы
 
     for (WebElement element : elements) {
       List<WebElement> elementDes = element.findElements(By.tagName("td"));
