@@ -16,7 +16,7 @@ public class ContactModificationTests extends TestBase {
   private void fillNewContactInformation(NewContactData contactData) {
     app.getContactHelper().fillContactForm(contactData,false);
     app.getContactHelper().submitContactModification();
-    app.getNavigationManager().gotoHome();
+    app.goTo().gotoHome();
   }
 
   @Test (enabled=false)//тест изменения контакта через промотр карточки контакта
@@ -28,10 +28,10 @@ public class ContactModificationTests extends TestBase {
   }
 
   public void createNewContact() {
-    app.getNavigationManager().gotoAddNewPage();
+    app.goTo() .gotoAddNewPage();
     app.getContactHelper().fillContactForm(new NewContactData("1610", "l1", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world","test11"),true);
     app.getContactHelper().submitContactCreation();
-    app.getNavigationManager().gotoHome();
+    app.goTo().gotoHome();
   }
 }
 

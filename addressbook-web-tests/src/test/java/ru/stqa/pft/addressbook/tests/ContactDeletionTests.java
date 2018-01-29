@@ -12,16 +12,16 @@ public class ContactDeletionTests extends TestBase {
   public void contactDeletionTests() {
 
     if (!app.getContactHelper().findAnyContact()) {
-      app.getNavigationManager().gotoAddNewPage();
+      app.goTo().gotoAddNewPage();
       app.getContactHelper().createNewContact(new NewContactData("new1610", "l1", "USA", "7845", "4",
               "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world", "CreateGr"));
-      app.getNavigationManager().gotoHome();
+      app.goTo().gotoHome();
     }
 
     List<NewContactData> before=app.getContactHelper().getContactList();
     app.getContactHelper().selectContacts(before.size()-1);
     app.getContactHelper().deleteSelectedContacts();
-    app.getNavigationManager().gotoHomeMenuLevel();
+    app.goTo() .gotoHomeMenuLevel();
 
     List<NewContactData> after=app.getContactHelper().getContactList();
 
