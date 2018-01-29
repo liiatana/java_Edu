@@ -57,14 +57,14 @@ public class GroupHelper extends HelperBase {
   }
 
 
-  public void createGroup(GroupData groupData) {
+  public void create(GroupData groupData) {
     initGroupCreation();
     fillGroupForm(groupData);
     submitGroupCreation();
     returnToGroupPage();
 
   }
-  public void modifyGroup(List<GroupData> before, GroupData group) {
+  public void modify(List<GroupData> before, GroupData group) {
     selectGroup(before.size() - 1);
     initGroupModification();
     fillGroupForm( group);
@@ -72,17 +72,24 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
+  public void delete(int index) {
+   selectGroup(index);
+    deleteSelectedGroups();
+   returnToGroupPage();
+  }
 
   public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
 
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));//находит все элементы по css сектору с тегом span и классом group
     for (WebElement element : elements) {
-      GroupData group = new GroupData(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null);
+      GroupData group = new GroupData()
+              .withId(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value"))).withName(element.getText());
+              //(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null);
       groups.add(group);
     }
     ;

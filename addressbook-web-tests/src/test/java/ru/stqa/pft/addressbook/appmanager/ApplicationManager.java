@@ -51,11 +51,12 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public GroupHelper getGroupHelper() {
+  public GroupHelper group()
+  {
     return groupHelper;
   }
 
-  public NavigationManager getNavigationManager() {
+  public NavigationManager goTo() {
     return navigationManager;
   }
 
