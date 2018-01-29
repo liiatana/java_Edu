@@ -6,14 +6,15 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.HashSet;
-import java.util.List;
+
+import java.util.Set;
 
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePrecondition(){
     app.goTo().groupPage() ;
-    if (app.group().list().size()==0) {
+    if (app.group().all().size()==0) {
       app.group().create(new GroupData().withName("newGrforDel"));
 
     };
@@ -23,19 +24,20 @@ public class GroupModificationTests extends TestBase {
   public void groupModificationTests() {
 
 
-    List<GroupData> before=app.group().list();
+    Set<GroupData> before=app.group().all();
+
+    GroupData updatedGroup=before.iterator().next();
 
     GroupData group=new GroupData()
-            .withId (before.get( before.size()-1).getId()).withName("newName18888");
-    int index=before.size();
+            .withId (updatedGroup.getId()).withName("newName1");
 
-    app.group().modify(before, group);
-    //int after= app.getGroupHelper().getGroupCount();
-    //Assert.assertEquals(after,before);
-    List<GroupData> after=app.group().list();
+    app.group().modify( group);
+
+
+    Set<GroupData> after=app.group().all();
     Assert.assertEquals(after.size(),before.size());
 
-    before.remove(before.size() - 1);
+    before.remove(updatedGroup);
     before.add(group);
     Assert.assertEquals(new HashSet<Object>(after),new HashSet<Object>(before));//HashSet  создает неупорядоченное множество. преобразут наши оба списка в множества
   }

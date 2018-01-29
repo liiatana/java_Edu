@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -64,8 +66,8 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
 
   }
-  public void modify(List<GroupData> before, GroupData group) {
-    selectGroup(before.size() - 1);
+  public void modify( GroupData group) {
+    selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm( group);
     submitGroupModification();
@@ -76,6 +78,17 @@ public class GroupHelper extends HelperBase {
    selectGroup(index);
     deleteSelectedGroups();
    returnToGroupPage();
+  }
+
+  public void delete(GroupData deletedGroup) {
+    selectGroupById(deletedGroup.getId());
+    deleteSelectedGroups();
+    returnToGroupPage();
+  }
+
+  private void selectGroupById(int id) {
+    wd.findElement(By.cssSelector( "input[value='"+id +"']")).click();
+
   }
 
   public int getGroupCount() {
@@ -97,4 +110,23 @@ public class GroupHelper extends HelperBase {
     return groups;
 
   }
+
+  public Set<GroupData> all() {
+
+    Set<GroupData> groups = new HashSet<GroupData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));//находит все элементы по css сектору с тегом span и классом group
+    for (WebElement element : elements) {
+      GroupData group = new GroupData()
+              .withId(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value"))).withName(element.getText());
+      //(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null);
+      groups.add(group);
+    }
+    ;
+
+    return groups;
+
+  }
+
+
+
 }
