@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -111,9 +112,9 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public Set<GroupData> all() {
+  public Groups all() {
 
-    Set<GroupData> groups = new HashSet<GroupData>();
+    Groups groups = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));//находит все элементы по css сектору с тегом span и классом group
     for (WebElement element : elements) {
       GroupData group = new GroupData()
