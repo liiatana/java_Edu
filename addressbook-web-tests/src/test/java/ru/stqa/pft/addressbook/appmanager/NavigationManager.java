@@ -20,14 +20,14 @@ public class NavigationManager extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void gotoAddNewPage() {
+  public void AddNewPage() {
     if(isElementPresent(By.id("Enter"))){
       return;
     }
     click(By.linkText("add new"));
   }
 
-  public void gotoHome() {
+  public void Home() {
 
     if(isElementPresent(By.id("maintable"))){
       return;
@@ -35,7 +35,7 @@ public class NavigationManager extends HelperBase {
     click(By.linkText("home page"));
   }
 
-  public void gotoHomeMenuLevel() {
+  public void HomeMenuLevel() {
     click(By.linkText("home"));
   }
 }

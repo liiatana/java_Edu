@@ -1,37 +1,56 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.NewContactData;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
 
-  @Test (enabled=false) // тест изменения контакта через кнопку Edit(Карандаш)
+  @BeforeMethod
+  public void ensurePrecondition() {
+    if (!app.contact().findAny()) {
+      app.goTo().AddNewPage();
+
+      NewContactData newContact = new NewContactData()
+              .withFirstName("yes")
+              .withLastName("no");
+
+      app.contact().createNew(newContact);
+      app.goTo().Home();
+    }}
+
+
+  @Test (enabled=true) // тест изменения контакта через кнопку Edit(Карандаш)
   public void contactModificationTestByEditClick() {
 
-    app.getContactHelper().initContantactModificationByEditClick();
-    fillNewContactInformation((new NewContactData("mody1qqqq", "QAZ", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world",null)));
+    Contacts before=app.contact().all();
 
-  }
+    NewContactData modifiedContact=before.iterator().next();
 
-  private void fillNewContactInformation(NewContactData contactData) {
-    app.getContactHelper().fillContactForm(contactData,false);
-    app.getContactHelper().submitContactModification();
-    app.goTo().gotoHome();
-  }
+    NewContactData newContactInfo= new NewContactData()
+            .withFirstName("newFName")
+            .withLastName("newLName")
+            .withAddress("newAdd")
+            .withId(modifiedContact.getId());
 
-  @Test (enabled=false)//тест изменения контакта через промотр карточки контакта
-  public void contactModificationByDetails() {
+    app.contact().initContantactModificationByEditClick(newContactInfo.getId());
+    app.contact().modifyByEditClick(newContactInfo);
 
-    app.getContactHelper().openContactDetails();
-    app.getContactHelper().initContantactModificationByDetails();
-    fillNewContactInformation(new NewContactData("Detmody1qqqq", "ZXC", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world","test11"));
-  }
+    app.goTo().Home();
 
-  public void createNewContact() {
-    app.goTo() .gotoAddNewPage();
-    app.getContactHelper().fillContactForm(new NewContactData("1610", "l1", "USA", "7845", "4", "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world","test11"),true);
-    app.getContactHelper().submitContactCreation();
-    app.goTo().gotoHome();
+    Contacts after=app.contact().all();
+
+    assertThat(after.size(), equalTo(before.size() ));
+
+    assertThat(after, equalTo(before.without(modifiedContact).withAdded(newContactInfo)));
+    //эта дрянь не работает- и непонятному почему
+
+
   }
 }
 

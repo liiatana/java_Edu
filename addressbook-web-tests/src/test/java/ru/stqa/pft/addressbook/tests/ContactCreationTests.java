@@ -1,49 +1,43 @@
 package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 
-import org.testng.Assert;
-
-import ru.stqa.pft.addressbook.appmanager.ContactHelper;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
-import java.util.Comparator;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void contactCreationTests() {
 
-    NewContactData newContact= new NewContactData("1ффф610qqq", "l1", "USA", "7845", "4",
-            "sdhfjh@dfjhgkj.tw", "sdhj-gf@sdjkl.ru", "world","CreateGr");
 
-    List<NewContactData> before=app.getContactHelper().getContactList();
-    app.goTo().gotoAddNewPage();
+    Contacts before = app.contact().all();
+
+    app.goTo().AddNewPage();
+
+    NewContactData newContact = new NewContactData()
+            .withFirstName("Имя")
+            .withLastName("Фамилия")
+            //.withGroup("newName1")
+            //.withId(before.stream().mapToInt((g)->g.getId()).max().getAsInt()+1)
+            .withAddress("add1");
+    app.contact().createNew(newContact);
+    app.goTo().Home();
+
+    Contacts after = app.contact().all();
+
+    assertThat(after.size(), equalTo(before.size() + 1));
+   // newContact.setGroup(null);
+    //newContact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
+    ;
+    assertThat(after, equalTo(before.withAdded(newContact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
+            //эта дрянь не работает- и непонятному почему
 
 
-    app.getContactHelper().createNewContact(newContact);
-    app.goTo().gotoHome();
-
-    List<NewContactData> after=app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() + 1);
-
-    newContact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId());
-    before.add(newContact);
-
-    Comparator<? super NewContactData> byId=new Comparator<NewContactData>() {
-      @Override
-      public int compare(NewContactData o1, NewContactData o2) {
-        if (o1.getId()> o2.getId()){
-
-
-        };
-
-        return 0;
-      }
-    };
-    after.stream().sorted(byId);
-
-  }
+    }
 
 
 }

@@ -19,7 +19,7 @@ public class GroupModificationTests extends TestBase {
   public void ensurePrecondition(){
     app.goTo().groupPage() ;
     if (app.group().all().size()==0) {
-      app.group().create(new GroupData().withName("newGrforDel"));
+      app.group().create(new GroupData().withName("newGrforMody"));
 
     };
   }
