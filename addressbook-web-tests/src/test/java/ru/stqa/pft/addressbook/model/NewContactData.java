@@ -19,9 +19,20 @@ public class NewContactData {
   private String work;
   private String home;
   private String email;
+  private String email2;
   private String email3;
   private String address2;
   private String allPhones;
+  private String allEmails;
+  private String group;
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+
+
+
 
   public String getAllPhones() {
     return allPhones;
@@ -39,13 +50,15 @@ public class NewContactData {
   }
 
 
-
+  public String getEmail2() {
+    return email2;
+  }
 
   public void setGroup(String group) {
     this.group = group;
   }
 
-  private String group;
+
 
 
 
@@ -123,4 +136,23 @@ public class NewContactData {
     return this;
   }
 
+  public NewContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public NewContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public NewContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public NewContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
 }

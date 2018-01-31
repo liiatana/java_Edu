@@ -28,8 +28,9 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddress());
     type(By.name("mobile"), contactData.getMobile());
     type(By.name("work"), contactData.getWork());
-    //type(By.name("email"), contactData.getEmail());
-    //type(By.name("email3"), contactData.getEmail3());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
     //type(By.name("address2"), contactData.getAddress2());
     type(By.name("home"), contactData.getHome());
 
@@ -134,6 +135,7 @@ public class ContactHelper extends HelperBase {
               .withLastName(elementDes.get   (1).getText())
               .withFirstName(elementDes.get   (2).getText())
               .withAddress(elementDes.get   (3).getText())
+              .withAllEmails(elementDes.get   (4).getText())
               .withAllPhones(elementDes.get   (5).getText());
       contacts.add(contact);
     }
@@ -159,6 +161,7 @@ public class ContactHelper extends HelperBase {
   public NewContactData infoFromEditForm(int contactId) {
     initContantactModificationByEditClick(contactId);
     NewContactData contactInfo = new NewContactData();
+
     contactInfo.withId(contactId);
     contactInfo.withFirstName(wd.findElement(By.name("firstname")).getAttribute("value"));
     contactInfo.withLastName(wd.findElement(By.name("lastname")).getAttribute("value"));
@@ -166,7 +169,12 @@ public class ContactHelper extends HelperBase {
     contactInfo.withHomePhone(wd.findElement(By.name("home")).getAttribute("value"));
     contactInfo.withMobile(wd.findElement(By.name("mobile")).getAttribute("value"));
     contactInfo.withWorkPhone(wd.findElement(By.name("work")).getAttribute("value"));
+    contactInfo.withEmail(wd.findElement(By.name("email")).getAttribute("value"));
+    contactInfo.withEmail2(wd.findElement(By.name("email2")).getAttribute("value"));
+    contactInfo.withEmail3(wd.findElement(By.name("email3")).getAttribute("value"));
+
     wd.navigate().back();
+
     return contactInfo;
   }
 
