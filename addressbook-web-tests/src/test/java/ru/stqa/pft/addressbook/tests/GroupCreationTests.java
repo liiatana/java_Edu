@@ -18,14 +18,13 @@ public class GroupCreationTests extends TestBase {
 
 
     app. goTo().groupPage();
-
     Groups before = app.group().all();
 
     GroupData newGroup = new GroupData()
             .withName ("CreateGr");
-           // .withId( before.stream().mapToInt((g)->g.getId()).max().getAsInt()+1);
 
     app.group().create(newGroup);
+    assertThat(app.group().count(), equalTo(before.size()+1 ));
     Groups after = app.group().all();
 
    // Assert.assertEquals(after.size(), before.size() + 1);
@@ -36,6 +35,24 @@ public class GroupCreationTests extends TestBase {
     //Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));//HashSet  создает неупорядоченное множество. преобразут наши оба списка в множества
     assertThat(after, equalTo(before.withAdded(newGroup)));
 
+  }
+
+
+  @Test
+  //проверка, что нельзщя создать группу с "плохим имененем"( с апострофом в данном случае)
+  public void testBadGroupCreation() {
+
+
+    app. goTo().groupPage();
+    Groups before = app.group().all();
+    GroupData newGroup = new GroupData()
+            .withName ("апос'троф");
+
+    app.group().create(newGroup);
+
+    assertThat(app.group().count(), equalTo(before.size() ));
+    Groups after = app.group().all();
+    assertThat(after, equalTo(before));
   }
 
 
