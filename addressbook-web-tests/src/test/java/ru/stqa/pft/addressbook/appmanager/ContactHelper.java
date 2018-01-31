@@ -25,11 +25,12 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("address"), contactData.getAddress());
-    //type(By.name("mobile"), contactData.getMobile());
-    //type(By.name("work"), contactData.getWork());
+    type(By.name("mobile"), contactData.getMobile());
+    type(By.name("work"), contactData.getWork());
     //type(By.name("email"), contactData.getEmail());
     //type(By.name("email3"), contactData.getEmail3());
     //type(By.name("address2"), contactData.getAddress2());
+    type(By.name("home"), contactData.getHome());
 
     if(creation ) {
       //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); //отключение таймаута
@@ -131,5 +132,19 @@ public class ContactHelper extends HelperBase {
 
   }
 
+
+  public NewContactData infoFromEditForm(int contactId) {
+    initContantactModificationByEditClick(contactId);
+    NewContactData contactInfo = new NewContactData();
+    contactInfo.withId(contactId);
+    contactInfo.withFirstName(wd.findElement(By.name("firstname")).getAttribute("value"));
+    contactInfo.withLastName(wd.findElement(By.name("lastname")).getAttribute("value"));
+    contactInfo.withAddress(wd.findElement(By.name("address")).getAttribute("value"));
+    contactInfo.withHomePhone(wd.findElement(By.name("home")).getAttribute("value"));
+    contactInfo.withMobile(wd.findElement(By.name("mobile")).getAttribute("value"));
+    contactInfo.withWorkPhone(wd.findElement(By.name("work")).getAttribute("value"));
+    wd.navigate().back();
+    return contactInfo;
+  }
 
 }

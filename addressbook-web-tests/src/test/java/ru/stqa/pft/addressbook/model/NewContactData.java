@@ -17,9 +17,16 @@ public class NewContactData {
   private String address;
   private String mobile;
   private String work;
+
+  public String getHome() {
+    return home;
+  }
+
+  private String home;
   private String email;
   private String email3;
   private String address2;
+
 
   public void setGroup(String group) {
     this.group = group;
@@ -122,6 +129,18 @@ public class NewContactData {
   }
   public NewContactData withGroup(String group){
     this.group = group;
+    return this;
+  }
+  public NewContactData withMobile(String mobile){
+    this.mobile = mobile;
+    return this;
+  }
+  public NewContactData withWorkPhone(String workPhone){
+    this.work = workPhone;
+    return this;
+  }
+  public NewContactData withHomePhone(String homePhone){
+    this.home = homePhone;
     return this;
   }
 
