@@ -55,15 +55,16 @@ public class GroupHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public boolean findAnyGroup() {
+  /*public boolean findAnyGroup() {
     return isElementPresent(By.name("selected[]"));
-  }
+  }*/
 
 
   public void create(GroupData groupData) {
     initGroupCreation();
     fillGroupForm(groupData);
     submitGroupCreation();
+    groupsCache=null;
     returnToGroupPage();
 
   }
@@ -72,18 +73,20 @@ public class GroupHelper extends HelperBase {
     initGroupModification();
     fillGroupForm( group);
     submitGroupModification();
+    groupsCache=null;
     returnToGroupPage();
   }
 
-  public void delete(int index) {
+  /*public void delete(int index) {
    selectGroup(index);
     deleteSelectedGroups();
    returnToGroupPage();
-  }
+  }*/
 
   public void delete(GroupData deletedGroup) {
     selectGroupById(deletedGroup.getId());
     deleteSelectedGroups();
+    groupsCache=null;
     returnToGroupPage();
   }
 
@@ -92,9 +95,9 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public int getGroupCount() {
+  /*public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
-  }
+  }*/
 
   public List<GroupData> list() {
 
@@ -112,19 +115,24 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public Groups all() {
+  private Groups groupsCache=null;
 
-    Groups groups = new Groups();
+  public Groups all() {
+    if(groupsCache!=null){
+      return new Groups(groupsCache);
+    }
+
+    Groups groupsCache = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));//находит все элементы по css сектору с тегом span и классом group
     for (WebElement element : elements) {
       GroupData group = new GroupData()
               .withId(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value"))).withName(element.getText());
       //(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null);
-      groups.add(group);
+      groupsCache.add(group);
     }
     ;
 
-    return groups;
+    return new Groups(groupsCache);
 
   }
 
