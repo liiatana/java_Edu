@@ -11,6 +11,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +34,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("email3"), contactData.getEmail3());
     //type(By.name("address2"), contactData.getAddress2());
     type(By.name("home"), contactData.getHome());
+    attach(By.name("photo"),contactData.getPhoto().getAbsolutePath());
 
     if(creation ) {
       //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); //отключение таймаута
@@ -46,6 +48,12 @@ public class ContactHelper extends HelperBase {
 
 
   }
+
+  private void attach(By photo, String file) {
+    if(file!=null) {
+        wd.findElement(photo).sendKeys(file);
+      }
+   }
 
   public void submitContactCreation() {
     click(By.name("submit"));
