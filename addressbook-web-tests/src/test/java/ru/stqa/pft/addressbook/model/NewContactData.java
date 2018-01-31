@@ -17,15 +17,28 @@ public class NewContactData {
   private String address;
   private String mobile;
   private String work;
+  private String home;
+  private String email;
+  private String email3;
+  private String address2;
+  private String allPhones;
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public NewContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+
 
   public String getHome() {
     return home;
   }
 
-  private String home;
-  private String email;
-  private String email3;
-  private String address2;
+
 
 
   public void setGroup(String group) {
@@ -34,36 +47,6 @@ public class NewContactData {
 
   private String group;
 
-
-  /*public NewContactData(int id, String firstName, String lastName, String address, String mobile, String work, String email, String email3, String address2, String group) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.address = address;
-    this.mobile = mobile;
-    this.work = work;
-
-    this.email = email;
-    this.email3 = email3;
-    this.address2 = address2;
-
-    this.group = group;
-  }
-
-  public NewContactData(String firstName, String lastName, String address, String mobile, String work, String email, String email3, String address2, String group) {
-    this.id = 0;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.address = address;
-    this.mobile = mobile;
-    this.work = work;
-
-    this.email = email;
-    this.email3 = email3;
-    this.address2 = address2;
-
-    this.group = group;
-  }*/
 
 
   public String getFirstName() {
@@ -106,11 +89,7 @@ public class NewContactData {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public NewContactData withId(int id){
+    public NewContactData withId(int id){
     this.id = id;
     return this;
   }

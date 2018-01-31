@@ -128,19 +128,16 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = wd.findElements(By.xpath("//tbody/tr[@name='entry']"));
     for (WebElement element : elements) {
       List<WebElement> elementDes = element.findElements(By.tagName("td"));
-      String[] phones=elementDes.get   (5).getText().split("\n");
 
       NewContactData contact = new NewContactData()
               .withId(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")))
               .withLastName(elementDes.get   (1).getText())
               .withFirstName(elementDes.get   (2).getText())
               .withAddress(elementDes.get   (3).getText())
-              .withHomePhone(phones[0])
-              .withMobile(phones[1])
-              .withWorkPhone(phones[2]);
+              .withAllPhones(elementDes.get   (5).getText());
       contacts.add(contact);
     }
-    ;
+
 
     return contacts;
 
