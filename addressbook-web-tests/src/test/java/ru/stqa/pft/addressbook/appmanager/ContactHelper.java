@@ -13,6 +13,7 @@ import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -98,13 +99,14 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public Contacts all() {
+  /*public Contacts all() {// старая версия до лекции 5,9( чтение и разделение телефонов)
 
     Contacts contacts = new Contacts();
 
     List<WebElement> elements = wd.findElements(By.xpath("//tbody/tr[@name='entry']"));
     for (WebElement element : elements) {
       List<WebElement> elementDes = element.findElements(By.tagName("td"));
+
       NewContactData contact = new NewContactData()
               .withId(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")))
               .withLastName(elementDes.get   (1).getText())
@@ -117,8 +119,32 @@ public class ContactHelper extends HelperBase {
 
     return contacts;
 
-  }
+  }*/
 
+  public Contacts all() {
+
+    Contacts contacts = new Contacts();
+
+    List<WebElement> elements = wd.findElements(By.xpath("//tbody/tr[@name='entry']"));
+    for (WebElement element : elements) {
+      List<WebElement> elementDes = element.findElements(By.tagName("td"));
+      String[] phones=elementDes.get   (5).getText().split("\n");
+
+      NewContactData contact = new NewContactData()
+              .withId(Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value")))
+              .withLastName(elementDes.get   (1).getText())
+              .withFirstName(elementDes.get   (2).getText())
+              .withAddress(elementDes.get   (3).getText())
+              .withHomePhone(phones[0])
+              .withMobile(phones[1])
+              .withWorkPhone(phones[2]);
+      contacts.add(contact);
+    }
+    ;
+
+    return contacts;
+
+  }
 
   public void delete(NewContactData deletedContact) {
     select(deletedContact.getId());
