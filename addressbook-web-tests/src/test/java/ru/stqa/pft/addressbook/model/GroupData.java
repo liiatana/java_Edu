@@ -1,9 +1,15 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+@XStreamAlias("group")//аннотация для второго способа экспорта в xml
+
 public class GroupData {
 
-
+@XStreamOmitField //аннотация для поля int id-означает, что в xml не надо загружать данное поле
   private int id;//=Integer.MAX_VALUE;
+
   private String name;
   private String header;
   private String footer;

@@ -6,11 +6,13 @@ repositories {
 
 
 dependencies {
-    compile 'org.testng:testng:6.11'
+    compile 'org.testng:testng:6.11'//тестовый фреймворк
     compile 'org.seleniumhq.selenium:selenium-java:3.5.2'
-    compile 'org.hamcrest:java-hamcrest:2.0.0.0'
-    compile 'org.gosu-lang.gosu.managed:gw-jcommander:1.48'
+    compile 'org.hamcrest:java-hamcrest:2.0.0.0'//проверки fluent
+    compile 'org.gosu-lang.gosu.managed:gw-jcommander:1.48'//библиотека для работы с командной ст
 
+    compile 'com.thoughtworks.xstream:xstream-distribution:1.4.10'//библиотека для работы с xml
+    compile 'com.google.code.gson:gson:2.8.2' //библиотека для работы с gson
 
 
 }

@@ -1,0 +1,12 @@
+<list>
+  <group>
+    <name>qname 0</name>
+    <header>qheader 0</header>
+    <footer>qfooter 0</footer>
+  </group>
+  <group>
+    <name>qname 1</name>
+    <header>qheader 1</header>
+    <footer>qfooter 1</footer>
+  </group>
+</list>

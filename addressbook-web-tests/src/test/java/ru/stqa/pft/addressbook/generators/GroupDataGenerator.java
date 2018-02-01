@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.generators;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.thoughtworks.xstream.XStream;
 import gw.internal.ext.com.beust.jcommander.ParameterException;
 import ru.stqa.pft.addressbook.model.GroupData;
 
@@ -20,6 +21,8 @@ public class GroupDataGenerator {
   @Parameter(names = "-f", description="File for export")
   public String file;
 
+  @Parameter(names = "-d", description="Data format file for export")
+  public String format;
 
   public static void main(String[] args) throws IOException {
     GroupDataGenerator generator= new GroupDataGenerator();
@@ -39,11 +42,28 @@ public class GroupDataGenerator {
 
   private void run() throws IOException {
     List<GroupData> groups=generateGroups(count);
-    save(groups,new File(file));
+    if(format.equals("csv")) {
+      saveAsCSV(groups, new File(file));
+    }else if(format.equals("xml")){
+      saveAsXML(groups, new File(file));
+    }else{
+      System.out.println("Unrecognized format: "+format);
+    };
 
   }
 
-  private void save(List<GroupData> groups, File file) throws IOException {
+  private void saveAsXML(List<GroupData> groups, File file) throws IOException {
+    XStream xstream = new XStream();
+    //xstream.alias("group", GroupData.class);//первый способ создания аннотаций в xml
+    xstream.processAnnotations(GroupData.class);// второй способ создания аннотации xml: предварительно в классе изкоторого эксперт даных, добавлена аннотация @XStreamAlias("group"
+    String xml = xstream.toXML(groups);
+    Writer writer=new FileWriter(file);
+    writer.write(xml);
+    writer.close();
+
+  }
+
+  private void saveAsCSV(List<GroupData> groups, File file) throws IOException {
 
     Writer writer=new FileWriter(file);
     for(GroupData group:groups){
@@ -59,9 +79,9 @@ public class GroupDataGenerator {
     List<GroupData> groups= new ArrayList<GroupData>();
     for( int i=0; i<count;i++){
       groups.add(new GroupData()
-              .withName(String.format("name %s",i))
-              .withHeader(String.format("header %s",i))
-              .withFooter(String.format("footer %s",i)));
+              .withName(String.format("qname %s",i))
+              .withHeader(String.format("qheader %s",i))
+              .withFooter(String.format("qfooter %s",i)));
     }
     return groups;
   }

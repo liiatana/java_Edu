@@ -18,3 +18,5 @@ gradle-app.setting
 *.class
 *.class
 *.class
+*.iml
+.idea/modules/addressbook-web-tests_test.iml
