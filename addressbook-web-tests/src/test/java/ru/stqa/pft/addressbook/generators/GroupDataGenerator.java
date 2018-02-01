@@ -60,9 +60,10 @@ public class GroupDataGenerator {
             .excludeFieldsWithoutExposeAnnotation()// означает что надо брать в рассчет @Expose
             .create();
     String json = gson.toJson(groups);
-    Writer writer=new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try(Writer writer=new FileWriter(file);){
+      writer.write(json);
+    }
+     //writer.close(); // при использовании конструкции try - закрывать не нужно, закрывается автоматом
 
   }
 
@@ -71,19 +72,22 @@ public class GroupDataGenerator {
     //xstream.alias("group", GroupData.class);//первый способ создания аннотаций в xml
     xstream.processAnnotations(GroupData.class);// второй способ создания аннотации xml: предварительно в классе изкоторого эксперт даных, добавлена аннотация @XStreamAlias("group"
     String xml = xstream.toXML(groups);
-    Writer writer=new FileWriter(file);
-    writer.write(xml);
-    writer.close();
+    try(Writer writer=new FileWriter(file);){
+      writer.write(xml);
+    }
+
+    //writer.close();
 
   }
 
   private void saveAsCSV(List<GroupData> groups, File file) throws IOException {
 
-    Writer writer=new FileWriter(file);
-    for(GroupData group:groups){
-      writer.write(String.format("%s;%s;%s\n",group.getName(),group.getHeader(),group.getFooter()));
+    try(Writer writer=new FileWriter(file)) {
+      for (GroupData group : groups) {
+        writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
+      }
     }
-    writer.close();
+    //writer.close();
 
 
   }

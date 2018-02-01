@@ -25,17 +25,18 @@ public class ContactCreationTests extends TestBase {
   public java.util.Iterator <Object[]> validContactsFromJSON() throws IOException {
 
     List<Object[]> list=new ArrayList< Object[]>();
-    BufferedReader reader=new BufferedReader(  new FileReader(new File("src\\test\\resources\\testContact.json")));
-    String line=reader.readLine();
-    String json="";
-    while(line!=null){
-      json+=line;
-      line=reader.readLine();
+    try(BufferedReader reader=new BufferedReader(  new FileReader(new File("src\\test\\resources\\testContact.json")))) {
+      String line = reader.readLine();
+      String json = "";
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<NewContactData> contacts = gson.fromJson(json, new TypeToken<List<NewContactData>>() {
+      }.getType()); //это аналогично List<NewContactData>.class
+      return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();// вот это заворот каждого объекта в массив из одного элемента, так надо для TestNG
     }
-    Gson gson = new Gson();
-    List<NewContactData> contacts =gson.fromJson(json, new TypeToken<List<NewContactData>>(){}.getType()); //это аналогично List<NewContactData>.class
-    return contacts.stream().map((g)-> new Object[] {g}).collect(Collectors.toList()).iterator();// вот это заворот каждого объекта в массив из одного элемента, так надо для TestNG
-
   }
 
   @Test(enabled = true , dataProvider = "validContactsFromJSON")

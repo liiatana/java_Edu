@@ -54,9 +54,12 @@ public class ContactDataGenerator {
             .excludeFieldsWithoutExposeAnnotation()// означает что надо брать в рассчет @Expose
             .create();
     String json = gson.toJson(contacts);
-    Writer writer=new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try(Writer writer=new FileWriter(file)){
+      writer.write(json);
+    }
+    ;
+
+    //writer.close();
   }
 
   private List<NewContactData> generateContacts(int count) {
