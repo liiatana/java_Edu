@@ -41,6 +41,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test(enabled = true , dataProvider = "validContactsFromJSON")
   public void contactCreationTests(NewContactData contactData) {
+    app.goTo().HomeMenuLevel();
 
     Contacts before = app.contact().all();
     app.goTo().AddNewPage();
