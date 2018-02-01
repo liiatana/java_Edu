@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 
 public class  NewContactData {
@@ -14,19 +16,32 @@ public class  NewContactData {
   private final String address2;
   private String group;*/
   private int id;
+  @Expose // аннотация для json.Означает что НАДО выгружать поле в json
   private String firstName;
+  @Expose
   private String lastName;
+  @Expose
   private String address;
+  @Expose
   private String mobile;
+  @Expose
   private String work;
+  @Expose
   private String home;
+  @Expose
   private String email;
+  @Expose
   private String email2;
+  @Expose
   private String email3;
+  @Expose
   private String address2;
+
   private String allPhones;
   private String allEmails;
+  @Expose
   private String group;
+
   private File photo;
 
   public String getAllEmails() {

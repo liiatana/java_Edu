@@ -36,10 +36,7 @@ public class GroupDataGenerator {
         return;
 
     }
-
     generator.run();
-
-
   }
 
   private void run() throws IOException {
