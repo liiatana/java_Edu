@@ -81,7 +81,7 @@ public class GroupData {
   }
 
   @Override
-  public String toString() {
+  public String toString() {//то, что здесь формируется, отображается в отчете по тесту групп
     return "GroupData{" +
             "id='" + id + '\'' +
             ", name='" + name + '\'' +

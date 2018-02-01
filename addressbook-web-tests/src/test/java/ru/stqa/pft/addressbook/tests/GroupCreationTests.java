@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
@@ -18,31 +19,27 @@ public class GroupCreationTests extends TestBase {
   @DataProvider
   public java.util.Iterator <Object[]> validGroups(){
     List<Object[]> list=new ArrayList< Object[]>();
-    list.add(new Object[] {"test1","h1","f1"});
-    list.add(new Object[] {"test2","h2","f2"});
-    list.add(new Object[] {"test3","h3","f3"});
+    list.add(new Object[] {new GroupData()
+            .withName ("tests1")
+            .withHeader("hs1")
+            .withFooter("fs1")});
+
     return list.iterator();
 
   }
 
   @Test(dataProvider = "validGroups")
   //создание группы в адресной книге
-  public void testGroupCreation( String name,String header,String footer) {
+  public void testGroupCreation( GroupData newGroup) {
 
 
     app. goTo().groupPage();
     Groups before = app.group().all();
 
-    GroupData newGroup = new GroupData()
-            .withName (name)
-            .withHeader(header)
-            .withFooter(footer);
-
     app.group().create(newGroup);
     assertThat(app.group().count(), equalTo(before.size()+1 ));
     Groups after = app.group().all();
 
-   // Assert.assertEquals(after.size(), before.size() + 1);
     assertThat(after.size(), equalTo(before.size() + 1));
     newGroup.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
 
