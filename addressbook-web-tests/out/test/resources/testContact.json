@@ -8,7 +8,8 @@
     "home": "8-00-000-00",
     "email": "email0@d0.com",
     "email2": "SecondEmail0@d0.com",
-    "email3": "ThirdEmail0@d0.com"
+    "email3": "ThirdEmail0@d0.com",
+    "photo": {}
   },
   {
     "firstName": "F_1_name",
@@ -19,7 +20,8 @@
     "home": "8-11-000-00",
     "email": "email1@d1.com",
     "email2": "SecondEmail1@d1.com",
-    "email3": "ThirdEmail1@d1.com"
+    "email3": "ThirdEmail1@d1.com",
+    "photo": {}
   },
   {
     "firstName": "F_2_name",
@@ -30,6 +32,7 @@
     "home": "8-22-000-00",
     "email": "email2@d2.com",
     "email2": "SecondEmail2@d2.com",
-    "email3": "ThirdEmail2@d2.com"
+    "email3": "ThirdEmail2@d2.com",
+    "photo": {}
   }
 ]

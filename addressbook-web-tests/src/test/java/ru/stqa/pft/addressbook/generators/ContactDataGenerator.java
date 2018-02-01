@@ -69,6 +69,7 @@ public class ContactDataGenerator {
               .withHomePhone(String.format("8-%s%s-000-00",i,i))
               .withWorkPhone(String.format("8 (999) 0%s0 %s%s",i,i,i))
               .withAddress(String.format("ул. Edu д. %s",i))
+              //.withPhoto(new File("src/test/resources/PNG74.png" ))
               .withEmail(String.format("email%s@d%s.com",i,i))
               .withEmail2(String.format("SecondEmail%s@d%s.com",i,i))
               .withEmail3(String.format("ThirdEmail%s@d%s.com",i,i)));

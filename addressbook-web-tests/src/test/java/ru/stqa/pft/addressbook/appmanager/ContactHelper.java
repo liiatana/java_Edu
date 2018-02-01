@@ -34,7 +34,8 @@ public class ContactHelper extends HelperBase {
     type(By.name("email3"), contactData.getEmail3());
     //type(By.name("address2"), contactData.getAddress2());
     type(By.name("home"), contactData.getHome());
-    attach(By.name("photo"),contactData.getPhoto().getAbsolutePath());
+     attach(By.name("photo"),contactData.getPhoto().getAbsolutePath());
+
 
     if(creation ) {
       //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); //отключение таймаута

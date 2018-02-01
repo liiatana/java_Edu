@@ -41,7 +41,7 @@ public class  NewContactData {
   private String allEmails;
   @Expose
   private String group;
-
+  @Expose
   private File photo;
 
   public String getAllEmails() {
