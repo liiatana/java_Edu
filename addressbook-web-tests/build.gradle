@@ -13,16 +13,6 @@ dependencies {
 
     compile 'com.thoughtworks.xstream:xstream-distribution:1.4.10'//библиотека для работы с xml
     compile 'com.google.code.gson:gson:2.8.2' //библиотека для работы с gson
-}
 
-task test (type: Test) {
-    useTestNG {
-        suites "src/test/resources/testNG-Contacts.xml.xml"
-    }
-}
 
-task test (type: Test) {
-    useTestNG {
-        suites "src/test/resources/testNG-Groups.xml.xml"
-    }
 }

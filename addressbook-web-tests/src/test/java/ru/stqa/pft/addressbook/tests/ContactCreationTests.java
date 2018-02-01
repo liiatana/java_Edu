@@ -42,13 +42,11 @@ public class ContactCreationTests extends TestBase {
   @Test(enabled = true , dataProvider = "validContactsFromJSON")
   public void contactCreationTests(NewContactData contactData) {
 
-    app.goTo().HomeMenuLevel();
     Contacts before = app.contact().all();
-
     app.goTo().AddNewPage();
-    contactData.withPhoto(new File("src/test/resources/PNG3.png"));
-    app.contact().createNew(contactData);
+    contactData.withPhoto(new File("src/test/resources/PNG74.png"));
 
+    app.contact().createNew(contactData);
     app.goTo().Home();
 
     Contacts after = app.contact().all();

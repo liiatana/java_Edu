@@ -48,6 +48,10 @@ public class  NewContactData {
     return allEmails;
   }
 
+
+
+
+
   public String getAllPhones() {
     return allPhones;
   }
@@ -57,9 +61,12 @@ public class  NewContactData {
     return this;
   }
 
+
+
   public String getHome() {
     return home;
   }
+
 
   public String getEmail2() {
     return email2;
@@ -68,6 +75,10 @@ public class  NewContactData {
   public void setGroup(String group) {
     this.group = group;
   }
+
+
+
+
 
   public String getFirstName() {
     return firstName;
@@ -118,41 +129,26 @@ public class  NewContactData {
     this.firstName = firstName;
     return this;
   }
-
   public NewContactData withLastName(String lastName){
     this.lastName = lastName;
     return this;
   }
-
   public NewContactData withAddress(String address){
     this.address = address;
     return this;
   }
-
-  @Override
-  public String toString() {
-    return "NewContactData{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
-  }
-
   public NewContactData withGroup(String group){
     this.group = group;
     return this;
   }
-
   public NewContactData withMobile(String mobile){
     this.mobile = mobile;
     return this;
   }
-
   public NewContactData withWorkPhone(String workPhone){
     this.work = workPhone;
     return this;
   }
-
   public NewContactData withHomePhone(String homePhone){
     this.home = homePhone;
     return this;
