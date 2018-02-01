@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -10,8 +11,11 @@ public class GroupData {
 @XStreamOmitField //аннотация для поля int id-означает, что в xml не надо загружать данное поле
   private int id;//=Integer.MAX_VALUE;
 
+  @Expose // аннотация для json.Означает что НАДО выгружать поле в json
   private String name;
+  @Expose
   private String header;
+  @Expose
   private String footer;
 
   /*public GroupData(int id, String name, String header, String footer) {

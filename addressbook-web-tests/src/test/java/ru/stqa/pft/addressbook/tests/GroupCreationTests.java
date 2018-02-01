@@ -1,6 +1,8 @@
 package ru.stqa.pft.addressbook.tests;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -21,7 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupCreationTests extends TestBase {
 
   @DataProvider
-  public java.util.Iterator <Object[]> validGroups() throws IOException {
+  public java.util.Iterator <Object[]> validGroupsFromXML() throws IOException {
     // это чтение из csv файла
     /*List<Object[]> list=new ArrayList< Object[]>();
     BufferedReader reader=new BufferedReader(  new FileReader(new File("src\test\resources\test.csv")));
@@ -54,7 +56,28 @@ public class GroupCreationTests extends TestBase {
 
   }
 
-  @Test(dataProvider = "validGroups")
+  @DataProvider
+  public java.util.Iterator <Object[]> validGroupsFromJSON() throws IOException {
+
+    List<Object[]> list=new ArrayList< Object[]>();
+    BufferedReader reader=new BufferedReader(  new FileReader(new File("src\\test\\resources\\test.json")));
+    String line=reader.readLine();
+    String json="";
+    while(line!=null){
+      json+=line;
+      line=reader.readLine();
+    }
+    Gson gson = new Gson();
+    //gson.fromJson(json, GroupData.class);//писать в кач-ве второго параметра GroupData.class можно,
+    // но это будет только один объект, а нам нужен список таких объектов. А написать List нельзя((( не работаеть..
+    // поэтому не шибюко понятное действие должно выглядеть так:
+    List<GroupData> groups =gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType()); //это аналогично List<GroupData>.class
+
+    return groups.stream().map((g)-> new Object[] {g}).collect(Collectors.toList()).iterator();// вот это заворот каждого объекта в массив из одного элемента, так надо для TestNG
+
+  }
+
+  @Test(dataProvider = "validGroupsFromJSON")
   //создание группы в адресной книге
   public void testGroupCreation( GroupData newGroup) {
 
@@ -74,6 +97,10 @@ public class GroupCreationTests extends TestBase {
     assertThat(after, equalTo(before.withAdded(newGroup)));
 
   }
+
+
+
+
 
 
   @Test
