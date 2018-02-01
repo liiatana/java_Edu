@@ -1,0 +1,24 @@
+[
+  {
+    "firstName": "F_0_name",
+    "lastName": "L_0_name",
+    "address": "ул. Edu д. 0",
+    "mobile": "8 927 00",
+    "work": "8 (999) 000 00",
+    "home": "8-00-000-00",
+    "email": "email0@d0.com",
+    "email2": "SecondEmail0@d0.com",
+    "email3": "ThirdEmail0@d0.com"
+  },
+  {
+    "firstName": "F_1_name",
+    "lastName": "L_1_name",
+    "address": "ул. Edu д. 1",
+    "mobile": "8 927 11",
+    "work": "8 (999) 010 11",
+    "home": "8-11-000-00",
+    "email": "email1@d1.com",
+    "email2": "SecondEmail1@d1.com",
+    "email3": "ThirdEmail1@d1.com"
+  }
+]

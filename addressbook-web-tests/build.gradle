@@ -17,7 +17,7 @@ dependencies {
 
 }
 
-task test (type: Test) {
+task test1 (type: Test) {
     useTestNG {
         suites "src/test/resources/testng-contacts.xml.xml"
     }
@@ -29,7 +29,7 @@ task test (type: Test) {
     }
 }
 
-task test (type: Test) {
+task test2 (type: Test) {
     useTestNG {
         suites "src/test/resources/testng-groups.xml.xml"
     }
