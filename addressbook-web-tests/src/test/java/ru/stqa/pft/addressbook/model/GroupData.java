@@ -3,19 +3,35 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @XStreamAlias("group")//аннотация для второго способа экспорта в xml
 
+@javax.persistence.Entity //для hibernate (объекто-реляц преобразования)
+@Table (name="group_list")
 public class GroupData {
 
 @XStreamOmitField //аннотация для поля int id-означает, что в xml не надо загружать данное поле
-  private int id;//=Integer.MAX_VALUE;
+@Id //указыватся для уникального идентификатора( ключа наверно)
+@Column(name="group_id")
+private int id;//=Integer.MAX_VALUE;
 
   @Expose // аннотация для json.Означает что НАДО выгружать поле в json
+  @Column(name="group_name") //Если в классе= имени поля в БД , то не надо этой строки
+  //иначе- нужно указать name=соответствующий столбец в Бд
   private String name;
   @Expose
+  @Column(name="group_header")
+  @Type(type="text") // указывается столбцов, в которых многострочные данные( иначе преобразование типов не работает, будет ошибка при компиляции)
   private String header;
   @Expose
+  @Column(name="group_footer")
+  @Type(type="text")
   private String footer;
 
   /*public GroupData(int id, String name, String header, String footer) {
