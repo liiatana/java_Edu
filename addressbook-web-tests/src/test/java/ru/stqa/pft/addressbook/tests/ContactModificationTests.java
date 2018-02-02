@@ -13,7 +13,7 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePrecondition() {
-    if (!app.contact().findAny()) {
+   /* if (!app.contact().findAny()) { // старые предусловия при получени списка контактов через GUI
       app.goTo().AddNewPage();
 
       NewContactData newContact = new NewContactData()
@@ -22,7 +22,21 @@ public class ContactModificationTests extends TestBase {
 
       app.contact().createNew(newContact);
       app.goTo().Home();
-    }}
+    }*/
+
+   // при работе через БД
+    if(app.db().groups().size()==0){
+      app.goTo().AddNewPage();
+      NewContactData newContact = new NewContactData()
+              .withFirstName("yes")
+              .withLastName("no");
+
+      app.contact().createNew(newContact);
+      app.goTo().Home();
+
+    }
+
+    }
 
 
   @Test (enabled=true) // тест изменения контакта через кнопку Edit(Карандаш)

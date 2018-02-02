@@ -25,6 +25,7 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private ContactHelper contactHelper;
   private String browser;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser)  {
 
@@ -35,7 +36,7 @@ public class ApplicationManager {
   public void init() throws IOException {
 
     //String browser = BrowserType.FIREFOX;
-
+    dbHelper = new DbHelper();
 
     String target=System.getProperty("target","local");
     properties.load(new FileReader(new File(String.format("src\\test\\resources\\%s.properties",target))));
@@ -58,6 +59,7 @@ public class ApplicationManager {
     contactHelper = new ContactHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"),
             properties.getProperty("web.adminPass"));
+    dbHelper = new DbHelper();
   }
 
 
@@ -78,5 +80,7 @@ public class ApplicationManager {
     return contactHelper;
   }
 
-
+  public DbHelper db() {
+    return dbHelper;
+  }
 }
