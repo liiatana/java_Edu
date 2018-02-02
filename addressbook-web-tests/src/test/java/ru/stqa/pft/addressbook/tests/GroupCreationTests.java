@@ -4,6 +4,8 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import org.slf4j.Logger; //это класс из которого нам нужен логгер
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -21,6 +23,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
+
+ // Logger logger= LoggerFactory.getLogger(GroupCreationTests.class);
 
   @DataProvider
   public java.util.Iterator <Object[]> validGroupsFromXML() throws IOException {
@@ -97,6 +101,7 @@ public class GroupCreationTests extends TestBase {
     //before.add(newGroup);
     //Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));//HashSet  создает неупорядоченное множество. преобразут наши оба списка в множества
     assertThat(after, equalTo(before.withAdded(newGroup)));
+
 
   }
 

@@ -13,6 +13,7 @@ dependencies {
 
     compile 'com.thoughtworks.xstream:xstream-distribution:1.4.10'//библиотека для работы с xml
     compile 'com.google.code.gson:gson:2.8.2' //библиотека для работы с gson
+    compile 'ch.qos.logback:logback-classic:1.2.3'//LOGGER
 
 
 }
