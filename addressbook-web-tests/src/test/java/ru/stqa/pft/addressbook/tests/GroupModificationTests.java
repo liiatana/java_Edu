@@ -31,7 +31,7 @@ public class GroupModificationTests extends TestBase {
     Groups before=app.db().groups();
     GroupData updatedGroup=before.iterator().next();
     GroupData group=new GroupData()
-            .withId (updatedGroup.getId()).withName("newName1");
+            .withId (updatedGroup.getId()).withName("newName1").withHeader("newHeader").withFooter("newFooter");
 
     app.goTo().groupPage() ;
     app.group().modify( group);
