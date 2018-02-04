@@ -5,8 +5,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
+import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.List;
 
@@ -32,7 +34,26 @@ public class DbHelper {
     return new Groups(result);
   }
 
+ public Contacts contacts() {
+   Session session = sessionFactory.openSession();
+   session.beginTransaction();
+   List<NewContactData> result = session.createQuery("from NewContactData where deprecated='0000-00-00'").list();
+   session.getTransaction().commit();
+   session.close();
+   return new Contacts(result);
+ }
+  public Contacts contactById(int id){
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    //List<NewContactData> result = session.createQuery( "from NewContactData where contact_id="+id ).list();
+    List<NewContactData> result = session.createQuery( "from NewContactData where contact_id="+id ).list();
+    session.getTransaction().commit();
+    session.close();
+    return new Contacts(result);
 
+
+
+ }
 
 
 

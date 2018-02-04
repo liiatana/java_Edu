@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactEmailTests extends TestBase{
   @BeforeMethod
   public void ensurePrecondition() {
-    if (!app.contact().findAny()) {
+    if (app.db().contacts().size()==0) {
       app.goTo().AddNewPage();
 
       NewContactData newContact = new NewContactData()
@@ -32,23 +32,27 @@ public class ContactEmailTests extends TestBase{
     }}
 
   @Test
-  public void testContactEmails(){
+  public void testContactEmails(){ // тест - сравнивает контакт из списка на главной страницы с контактом на форме редактирования по адресам почты
 
     app.goTo().Home();
     Contacts before = app.contact().all();
     NewContactData contact=before.iterator().next();
     NewContactData contactDataFromEditForm=app.contact().infoFromEditForm(contact.getId());
+    //Contacts contactFromDb=app.db().contactById(contact.getId());
     assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactDataFromEditForm)));
 
   }
 
-  private String mergeEmails(NewContactData contactDataFromEditForm) {
-    return Arrays.asList(contactDataFromEditForm.getEmail(),contactDataFromEditForm.getEmail2(),contactDataFromEditForm.getEmail3())
+
+
+  private String mergeEmails(NewContactData contact) {
+    return Arrays.asList(contact.getEmail(),contact.getEmail2(),contact.getEmail3())
             .stream()
             .filter((s)->!equals(""))
             .collect(Collectors.joining("\n"))  ;
 
   }
+
 
 
 

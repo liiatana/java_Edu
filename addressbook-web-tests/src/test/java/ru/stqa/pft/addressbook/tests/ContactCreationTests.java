@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -43,22 +44,25 @@ public class ContactCreationTests extends TestBase {
   public void contactCreationTests(NewContactData contactData) {
     app.goTo().HomeMenuLevel();
 
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.goTo().AddNewPage();
-    contactData.withPhoto(new File("src/test/resources/PNG74.png"));
+   // contactData.withPhoto(new File("src/test/resources/PNG3.png"));
+
 
     app.contact().createNew(contactData);
     app.goTo().Home();
 
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
 
     assertThat(after.size(), equalTo(before.size() + 1));
    // newContact.setGroup(null);
     //newContact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
+    Contacts beforePlus=before.withAdded(contactData.withAddress2("").withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()));
     ;
 
-    //assertThat(after, equalTo(before.withAdded(newContact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
+    //assertThat(after, equalTo(before.withAdded(contactData.withAddress2("").withId(before.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
             //эта дрянь не работает- и непонятному почему
+    MatcherAssert.assertThat(after,equalTo(beforePlus));
 
 
     }

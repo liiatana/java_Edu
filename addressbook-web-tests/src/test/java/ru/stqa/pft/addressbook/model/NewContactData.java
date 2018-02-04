@@ -85,17 +85,14 @@ public class  NewContactData {
   @Expose
   // В Бд у нас строка, а в объекте тип поля=ФАЙЛ, поэтому декларацию (private File photo;) меняем на String и меняем getter +setter
   // так чтобы они сами преобразовывали в тип File
-  @Column (name="photo")
-  @Type(type="text")
+  //@Column (name="photo")
+  //@Type(type="text")
+  @Transient
   private String photo;
 
   public String getAllEmails() {
     return allEmails;
   }
-
-
-
-
 
   public String getAllPhones() {
     return allPhones;
@@ -106,12 +103,9 @@ public class  NewContactData {
     return this;
   }
 
-
-
   public String getHome() {
     return home;
   }
-
 
   public String getEmail2() {
     return email2;
@@ -120,10 +114,6 @@ public class  NewContactData {
   public void setGroup(String group) {
     this.group = group;
   }
-
-
-
-
 
   public String getFirstName() {
     return firstName;
@@ -165,7 +155,7 @@ public class  NewContactData {
     return id;
   }
 
-    public NewContactData withId(int id){
+  public NewContactData withId(int id){
     this.id = id;
     return this;
   }
@@ -174,26 +164,32 @@ public class  NewContactData {
     this.firstName = firstName;
     return this;
   }
+
   public NewContactData withLastName(String lastName){
     this.lastName = lastName;
     return this;
   }
+
   public NewContactData withAddress(String address){
     this.address = address;
     return this;
   }
+
   public NewContactData withGroup(String group){
     this.group = group;
     return this;
   }
+
   public NewContactData withMobile(String mobile){
     this.mobile = mobile;
     return this;
   }
+
   public NewContactData withWorkPhone(String workPhone){
     this.work = workPhone;
     return this;
   }
+
   public NewContactData withHomePhone(String homePhone){
     this.home = homePhone;
     return this;
@@ -220,11 +216,20 @@ public class  NewContactData {
   }
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo != null) {
+      return new File(photo);
+    } return null;
+    //return new File(photo);
   }
 
   public NewContactData withPhoto(File photo) {
+
     this.photo = photo.getPath();
+    return this;
+  }
+
+  public NewContactData withAddress2(String address2) {
+    this.address2 = address2;
     return this;
   }
 

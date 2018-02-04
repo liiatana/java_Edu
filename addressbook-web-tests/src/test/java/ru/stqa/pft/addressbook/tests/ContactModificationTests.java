@@ -42,14 +42,22 @@ public class ContactModificationTests extends TestBase {
   @Test (enabled=true) // тест изменения контакта через кнопку Edit(Карандаш)
   public void contactModificationTestByEditClick() {
 
-    Contacts before=app.contact().all();
-
+    //Contacts before=app.contact().all();
+    Contacts before=app.db().contacts();
     NewContactData modifiedContact=before.iterator().next();
 
     NewContactData newContactInfo= new NewContactData()
             .withFirstName("newFName")
             .withLastName("newLName")
             .withAddress("newAdd")
+            .withAddress2("sfds")
+            .withMobile("222")
+            .withWorkPhone("333")
+            .withHomePhone("444")
+            .withEmail2("ddddddddd")
+            .withEmail("ddddddddd")
+            .withEmail3("ddddddddd")
+            //.wi
             .withId(modifiedContact.getId());
 
     app.contact().initContantactModificationByEditClick(newContactInfo.getId());
@@ -57,13 +65,13 @@ public class ContactModificationTests extends TestBase {
 
     app.goTo().Home();
 
-    Contacts after=app.contact().all();
+    Contacts after=app.db().contacts();
 
     assertThat(after.size(), equalTo(before.size() ));
 
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(newContactInfo)));
     //эта дрянь не работает- и непонятному почему
-
+    System.out.println("Jr");
 
   }
 }
