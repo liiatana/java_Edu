@@ -5,6 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table (name="addressbook")
 
@@ -77,10 +80,17 @@ public class  NewContactData {
   @Transient
   private String allEmails;
 
-  @Expose
-  @Transient // означает, что пропускать , т.к информация о группе контакта не хранится в таблице, либо
+  //@Expose
+  //@Transient // означает, что пропускать , т.к информация о группе контакта не хранится в таблице, либо
   // можно использовать аналогичное слово перед аннотацией, т.е чтобы выглядело объявление так: transient private String group;
-  private String group;
+  //private String group;
+
+  @ManyToMany(fetch=FetchType.EAGER)// чтобы сразу извлекалась и инфа о контактах
+  @JoinTable(name="address_in_groups",
+          joinColumns = @JoinColumn(name="id"),inverseJoinColumns = @JoinColumn (name="group_id"))
+  private Set<GroupData> groups= new HashSet<GroupData>();
+
+
 
   @Expose
   // В Бд у нас строка, а в объекте тип поля=ФАЙЛ, поэтому декларацию (private File photo;) меняем на String и меняем getter +setter
@@ -111,9 +121,7 @@ public class  NewContactData {
     return email2;
   }
 
-  public void setGroup(String group) {
-    this.group = group;
-  }
+
 
   public String getFirstName() {
     return firstName;
@@ -147,9 +155,7 @@ public class  NewContactData {
     return address2;
   }
 
-  public String getGroup() {
-    return group;
-  }
+
 
   public int getId() {
     return id;
@@ -175,14 +181,15 @@ public class  NewContactData {
     return this;
   }
 
-  public NewContactData withGroup(String group){
-    this.group = group;
-    return this;
-  }
 
   public NewContactData withMobile(String mobile){
     this.mobile = mobile;
     return this;
+  }
+
+  public Groups getGroups() {
+
+    return new Groups(groups);
   }
 
   public NewContactData withWorkPhone(String workPhone){
@@ -276,5 +283,11 @@ public class  NewContactData {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             '}';
+  }
+
+  public NewContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+
   }
 }

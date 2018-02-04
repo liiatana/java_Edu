@@ -6,9 +6,9 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Entity;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("group")//аннотация для второго способа экспорта в xml
 
@@ -33,6 +33,17 @@ private int id;//=Integer.MAX_VALUE;
   @Column(name="group_footer")
   @Type(type="text")
   private String footer;
+
+  public Contacts getContacts() {
+    return  new Contacts(contacts);
+  }
+
+  @ManyToMany(mappedBy = "groups")
+  /*@JoinTable(name="address_in_groups",
+          joinColumns = @JoinColumn(name="group_id"),inverseJoinColumns = @JoinColumn (name="id"))*/
+  //вот это , что выше,описывать не обязательно. Инструкция mappedBy говорит, что все описание нужно взять в парном классе
+
+  private Set<NewContactData> contacts= new HashSet<NewContactData>();
 
   public int getId() {
     return id;
