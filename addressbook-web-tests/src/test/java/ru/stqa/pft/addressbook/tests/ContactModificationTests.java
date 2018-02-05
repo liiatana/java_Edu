@@ -70,7 +70,7 @@ public class ContactModificationTests extends TestBase {
     assertThat(after.size(), equalTo(before.size() ));
 
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(newContactInfo)));
-    //эта дрянь не работает- и непонятному почему
+    //эта дрянь не работает- и непонятному почему-- все рабботает( забыла метод eqyals in NewContactData
     System.out.println("Jr");
 
   }

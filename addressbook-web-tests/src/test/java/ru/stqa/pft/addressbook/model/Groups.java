@@ -2,11 +2,10 @@ package ru.stqa.pft.addressbook.model;
 
 
 import com.google.common.collect.ForwardingSet;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-import java.util.Collection;
-import java.util.HashSet;
-
-import java.util.Set;
+import java.util.*;
 
 public class Groups extends ForwardingSet<GroupData> {
 
@@ -40,6 +39,7 @@ public class Groups extends ForwardingSet<GroupData> {
     groups.remove(group);
     return groups;
   }
+
 
 
 }
