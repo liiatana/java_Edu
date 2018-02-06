@@ -26,11 +26,18 @@ public class ContactBelongToGroups extends TestBase {
       app.contact().createNew(newContact);
       app.goTo().Home();
     }
+    if(app.db().groups().size()==0) {
+      app.goTo().groupPage();
+      GroupData newGroup = new GroupData()
+              .withName("TestGroupforDelete");
+
+      app.goTo().groupPage();
+      app.group().create(newGroup);
+    }
   }
 
-  @Test(enabled = true)
-  public void addContactToGroupsTests() {
-
+  @Test(enabled = false)
+  public void addContactToGroupTest() {
 
     Groups allGroups = app.db().groups();
     Contacts allContacts = app.db().contacts();
@@ -41,9 +48,7 @@ public class ContactBelongToGroups extends TestBase {
       app. goTo().groupPage();
       app.group().create(new GroupData().withName("grForTestaaaa"));
       allGroups = app.db().groups();
-
     }
-
       allGroups.removeAll(contact.getGroups());
       GroupData addedGroup=allGroups.iterator().next();
       app.goTo().HomeMenuLevel();
@@ -55,6 +60,30 @@ public class ContactBelongToGroups extends TestBase {
     MatcherAssert.assertThat(newContactInfo.getGroups().size(), CoreMatchers.equalTo(contact.getGroups().size()+1));
     MatcherAssert.assertThat(newContactInfo.getGroups(), CoreMatchers.equalTo(contact.getGroups().withAdded(addedGroup)));
 
+  }
+
+  @Test(enabled = true)
+  public void deleteContactFromGroupTest() {
+
+    Contacts allContacts = app.db().contacts();
+    NewContactData contact=allContacts .iterator().next();
+    Groups allGroups = app.db().groups();
+
+    if (contact.getGroups().size()==0 ){
+
+        app.contact().addToGroup(contact, allGroups.iterator().next());
+    }
+
+    GroupData deletedGroup=app.db().contactById(contact.getId()).getGroups().iterator().next();
+    app.goTo().HomeMenuLevel();
+
+    app.contact().deleteFromGroup(contact, deletedGroup);
+
+    app.goTo().HomeMenuLevel();
+
+    System.out.println(contact.getGroups());
+  }
+
+
 
   }
-}

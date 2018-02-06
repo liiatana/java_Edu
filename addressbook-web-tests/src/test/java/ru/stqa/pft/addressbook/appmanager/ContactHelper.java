@@ -212,12 +212,25 @@ public class ContactHelper extends HelperBase {
 
   public void addToGroup(NewContactData contact, GroupData addedGroup) {
 
+
+
     select(contact.getId());
 
     new Select(wd.findElement(By.name("to_group")))
-            .selectByValue(Integer.toString( addedGroup.getId())); //selectByVisibleText(addedGroup.getName());
+            .selectByValue(Integer.toString( addedGroup.getId()));
 
     click(By.name("add"));
+
+  }
+
+  public void deleteFromGroup(NewContactData contact, GroupData deletedGroup) {
+
+    new Select(wd.findElement(By.name("group")))
+            .selectByValue(Integer.toString( deletedGroup.getId()));
+
+    select(contact.getId());
+    click(By.name("remove"));
+
 
   }
 }
