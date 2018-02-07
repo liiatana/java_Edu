@@ -15,11 +15,14 @@ import java.util.Properties;
 
 public class ApplicationManager {
 
-  WebDriver wd;
+  private WebDriver wd;
 
   private final Properties properties;
 
-   private String browser;
+  private String browser;
+  private RegistrationHelper registrationHelper;
+  private FtpHelper ftp;
+  private MailHelper mail;
 
 
   public ApplicationManager(String browser)  {
@@ -35,24 +38,57 @@ public class ApplicationManager {
     String target=System.getProperty("target","local");
     properties.load(new FileReader(new File(String.format("src\\test\\resources\\%s.properties",target))));
 
-    if (Objects.equals(browser, BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-    } else if (Objects.equals(browser, BrowserType.CHROME)) {
-      wd = new ChromeDriver();
-    } else if ((Objects.equals(browser, BrowserType.IE))) {
-      wd = new InternetExplorerDriver();
-    }
-
-
-    //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); //отключение таймаута
-
-    wd.get(properties.getProperty("web.baseUrl"));
-
-  }
+   }
 
   public void stop() {
-    wd.quit();
+    if (wd != null) {
+         wd.quit();
+    }
   }
 
+  public HttpSession newSession(){
+    return new HttpSession(this);
+  }
+
+
+  public String getProperty(String key) {
+       return properties.getProperty(key);
+  }
+
+  public RegistrationHelper registration() {
+    if (registrationHelper==null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+
+  public WebDriver getDiver() {
+    if (wd==null){
+          if (Objects.equals(browser, BrowserType.FIREFOX)) {
+            wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
+          } else if (Objects.equals(browser, BrowserType.CHROME)) {
+            wd = new ChromeDriver();
+          } else if ((Objects.equals(browser, BrowserType.IE))) {
+            wd = new InternetExplorerDriver();
+          }
+    }
+    //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); //отключение таймаута
+    wd.get(properties.getProperty("web.baseUrl"));
+    return wd;
+  }
+
+  public FtpHelper ftp() {
+    if (ftp ==null) {
+      ftp = new FtpHelper(this);
+    }
+    return ftp;
+  }
+
+  public MailHelper mail() {
+    if (mail ==null) {
+      mail = new MailHelper(this);
+    }
+    return mail;
+  }
 
 }

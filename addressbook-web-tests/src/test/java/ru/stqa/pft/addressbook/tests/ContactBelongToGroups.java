@@ -72,9 +72,10 @@ public class ContactBelongToGroups extends TestBase {
     if (contact.getGroups().size()==0 ){
 
         app.contact().addToGroup(contact, allGroups.iterator().next());
-    }
 
-    GroupData deletedGroup=app.db().contactById(contact.getId()).getGroups().iterator().next();
+    }
+    Groups before=app.db().contactById(contact.getId()).getGroups();
+    GroupData deletedGroup=before.iterator().next();
     app.goTo().HomeMenuLevel();
 
     app.contact().deleteFromGroup(contact, deletedGroup);
@@ -82,6 +83,12 @@ public class ContactBelongToGroups extends TestBase {
     app.goTo().HomeMenuLevel();
 
     System.out.println(contact.getGroups());
+
+    Groups after=app.db().contactById(contact.getId()).getGroups();
+    MatcherAssert.assertThat(after.size(), CoreMatchers.equalTo(before.size()-1));
+    MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(deletedGroup)));
+
+
   }
 
 
