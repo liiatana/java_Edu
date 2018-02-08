@@ -1,8 +1,6 @@
 package ru.stqa.pft.mantis.tests;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import ru.stqa.pft.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
@@ -12,7 +10,7 @@ import java.util.List;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class RegistrationTests extends  TestBase{
-  @BeforeMethod
+  @BeforeTest
   public void startMailServer(){
     app.mail().start();
   }
@@ -20,11 +18,11 @@ public class RegistrationTests extends  TestBase{
   @Test
   public void testRegistration() throws IOException, MessagingException {
     String email = "usermail@qw.fgh";
-    String user = "user33asdas3";
+    String user = "qqq33asdas3";
     String password = "password";
 
     app.registration().start(user, email);
-    List<MailMessage> mailMasseges=app.mail().waitForMail(2,10000);
+    List<MailMessage> mailMasseges=app.mail().waitForMail(2,1000);
     String confirmationLink = app.mail().findConfirmationLink(mailMasseges, email);
 
     app.registration().finish(confirmationLink, password);
@@ -32,7 +30,7 @@ public class RegistrationTests extends  TestBase{
 
   }
 
-  @AfterMethod(alwaysRun = true)
+  @AfterTest(alwaysRun = true)
   public void stopMailServer(){
     app.mail().stop();
   }

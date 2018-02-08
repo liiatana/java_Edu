@@ -23,6 +23,9 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mail;
+  private DbHelper db;
+  private UserManageHelper um;
+
 
 
   public ApplicationManager(String browser)  {
@@ -37,6 +40,7 @@ public class ApplicationManager {
 
     String target=System.getProperty("target","local");
     properties.load(new FileReader(new File(String.format("src\\test\\resources\\%s.properties",target))));
+    //db = new DbHelper();
 
    }
 
@@ -90,5 +94,18 @@ public class ApplicationManager {
     }
     return mail;
   }
+
+  public DbHelper db() {
+    if (db==null){
+      db = new DbHelper(this);
+    }
+    return db;
+  }
+
+  public UserManageHelper um(){
+    um=new UserManageHelper(this);
+    return um;
+  }
+
 
 }
