@@ -14,6 +14,9 @@ public class SoapTests extends TestBase{
 
   @Test
   public void testGetProjects() throws MalformedURLException, ServiceException, RemoteException {
+
+    skipIfNotFixed(3);
+
     Set<Project> projects = app.sp().getProjects();
     System.out.println(projects.size());
     for (Project project:projects){
@@ -21,8 +24,10 @@ public class SoapTests extends TestBase{
     }
   }
 
-  @Test
+  @Test()
   public void testCreateIssue() throws MalformedURLException, ServiceException, RemoteException {
+    skipIfNotFixed(3);
+    
     Set<Project> projects = app.sp().getProjects();
     Project project=projects.iterator().next();
     Issue issue= new Issue()
