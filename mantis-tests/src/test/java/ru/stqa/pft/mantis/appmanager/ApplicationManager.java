@@ -25,6 +25,7 @@ public class ApplicationManager {
   private MailHelper mail;
   private DbHelper db;
   private UserManageHelper um;
+  private SoapHelper sp;
 
 
 
@@ -107,5 +108,10 @@ public class ApplicationManager {
     return um;
   }
 
-
+  public SoapHelper sp(){
+    if(sp==null) {
+      sp = new SoapHelper(this);
+    }
+    return sp;
+  }
 }
