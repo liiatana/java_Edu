@@ -17,6 +17,9 @@ dependencies {
     compile 'mysql:mysql-connector-java:8.0.9-rc'
     compile 'org.hibernate:hibernate-core:5.2.11.Final'
 
+    compile 'com.jayway.restassured:rest-assured:2.9.0'//библиотека для работы c rest, см https://github.com/rest-assured/rest-assured
+
+
 
 }
 

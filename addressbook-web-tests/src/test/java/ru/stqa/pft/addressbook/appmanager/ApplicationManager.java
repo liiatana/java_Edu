@@ -26,6 +26,7 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private String browser;
   private DbHelper dbHelper;
+  private RestApiHelper apiH;
 
   public ApplicationManager(String browser)  {
 
@@ -60,6 +61,7 @@ public class ApplicationManager {
     sessionHelper.login(properties.getProperty("web.adminLogin"),
             properties.getProperty("web.adminPass"));
     dbHelper = new DbHelper();
+    apiH= new RestApiHelper();
   }
 
 
@@ -83,4 +85,10 @@ public class ApplicationManager {
   public DbHelper db() {
     return dbHelper;
   }
+
+  public RestApiHelper apiH() {
+
+    return apiH;
+  }
+
 }

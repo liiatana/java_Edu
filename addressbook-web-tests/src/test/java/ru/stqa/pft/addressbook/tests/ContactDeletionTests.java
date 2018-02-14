@@ -12,6 +12,7 @@ public class ContactDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePrecondition() {
+    skipIfNotFixed(799);// пропустить тест , если не починен баг
     if (app.db().contacts().size()==0) {
       app.goTo().AddNewPage();
 
@@ -21,10 +22,12 @@ public class ContactDeletionTests extends TestBase {
 
       app.contact().createNew(newContact);
       app.goTo().Home();
-  }}
+  }
+  }
 
   @Test(enabled = true)
   public void contactDeletionTests() {
+
 
     Contacts before=app.db().contacts();
 

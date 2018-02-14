@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'org.apache.httpcomponents:httpclient:4.5.3'
+    compile 'org.testng:testng:6.11'//тестовый фреймворк
+    compile 'org.apache.httpcomponents:fluent-hc:4.5.3'//http://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html
+    compile 'com.google.code.gson:gson:2.8.2' //библиотека для работы с gson
+    compile 'com.jayway.restassured:rest-assured:2.9.0'//библиотека для работы c rest, см https://github.com/rest-assured/rest-assured
+
+
+}

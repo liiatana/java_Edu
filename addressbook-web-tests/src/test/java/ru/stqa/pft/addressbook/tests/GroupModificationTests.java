@@ -28,6 +28,7 @@ public class GroupModificationTests extends TestBase {
   @Test(enabled=true)
   public void groupModificationTests() {
 
+
     Groups before=app.db().groups();
     GroupData updatedGroup=before.iterator().next();
     GroupData group=new GroupData()

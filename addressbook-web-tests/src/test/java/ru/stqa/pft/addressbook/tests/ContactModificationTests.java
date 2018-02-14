@@ -42,6 +42,7 @@ public class ContactModificationTests extends TestBase {
   @Test (enabled=true) // тест изменения контакта через кнопку Edit(Карандаш)
   public void contactModificationTestByEditClick() {
 
+
     //Contacts before=app.contact().all();
     Contacts before=app.db().contacts();
     NewContactData modifiedContact=before.iterator().next();
